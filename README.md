@@ -561,9 +561,8 @@
   <p class="hero-sub">SubZero scans your inbox and surfaces every subscription quietly charging you — so you can <strong>kill the ones you don't need</strong> in seconds.</p>
 
   <div class="cta-group" id="waitlist">
-    <form class="cta-form" name="waitlist" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field">
+    <form class="cta-form" name="waitlist" method="POST" onsubmit="handleFormSubmit(event)">
       <input type="hidden" name="form-name" value="waitlist" />
-      <input type="hidden" name="bot-field" />
       <input type="email" name="email" id="email-input" placeholder="your@email.com" required />
       <button type="submit">Get early access</button>
     </form>
@@ -672,9 +671,8 @@
 <section class="final-cta">
   <h2>Find out what's charging you tonight</h2>
   <p>Join the waitlist — free during beta, no card needed.</p>
-  <form class="cta-form" name="waitlist" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field">
+  <form class="cta-form" name="waitlist-final" method="POST" onsubmit="handleFormSubmit(event)">
     <input type="hidden" name="form-name" value="waitlist" />
-    <input type="hidden" name="bot-field" />
     <input type="email" name="email" id="email-input-2" placeholder="your@email.com" required />
     <button type="submit">Join waitlist</button>
   </form>
@@ -685,6 +683,21 @@
   <p>© 2026 SubZero · <a href="#" style="color:var(--slate); text-decoration:none;">Privacy</a> · Read-only inbox access, always.</p>
 </footer>
 
+<script>
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    
+    // Get the email value
+    const form = event.target;
+    const email = form.querySelector('input[name="email"]').value;
+    
+    // Optional: Save email to localStorage for the thank you page
+    localStorage.setItem('userEmail', email);
+    
+    // Redirect to thank you page
+    window.location.href = 'thank-you.html';
+  }
+</script>
 
 </body>
 </html>
